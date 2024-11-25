@@ -1,6 +1,6 @@
 import AlertDropdown from "@/alerts/alertDropDown";
 import DataStaxLogo from "@/assets/DataStaxLogo.svg?react";
-import LangflowLogo from "@/assets/LangflowLogo.svg?react";
+import InstroLogo from "@/assets/Instro_Brandmark_Coral.svg?react";
 import ShadTooltip from "@/components/shadTooltipComponent";
 import { CustomOrgSelector } from "@/customization/components/custom-org-selector";
 import { CustomProductSelector } from "@/customization/components/custom-product-selector";
@@ -59,7 +59,7 @@ export default function AppHeader(): JSX.Element {
           {ENABLE_DATASTAX_LANGFLOW ? (
             <DataStaxLogo className="fill-black dark:fill-[white]" />
           ) : ENABLE_NEW_LOGO ? (
-            <LangflowLogo className="h-5 w-6" />
+            <InstroLogo className="h-5 w-6" />
           ) : (
             <span className="fill-black text-2xl dark:fill-white">⛓️</span>
           )}
