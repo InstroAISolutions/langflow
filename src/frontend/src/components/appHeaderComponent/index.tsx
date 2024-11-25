@@ -85,7 +85,7 @@ export default function AppHeader(): JSX.Element {
               unstyled
               className="hidden items-center whitespace-nowrap pr-2 2xl:inline"
               onClick={() =>
-                window.open("https://github.com/langflow-ai/langflow", "_blank")
+                window.open("https://github.com/InstroAISolutions/langflow", "_blank")
               }
             >
               <GithubStarComponent />
@@ -179,6 +179,27 @@ export default function AppHeader(): JSX.Element {
                 />
                 <span className="hidden whitespace-nowrap 2xl:inline">
                   Docs
+                </span>
+              </Button>
+            </ShadTooltip>
+            <ShadTooltip content="Vercel" side="bottom" styleClasses="z-10">
+              <Button
+                variant="ghost"
+                className="flex text-sm font-medium"
+                onClick={() =>
+                  window.open(
+                    "https://vercel.com/instro-team",
+                    "_blank",
+                  )
+                }
+              >
+                <ForwardedIconComponent
+                  name="book-open-text"
+                  className="side-bar-button-size h-[18px] w-[18px]"
+                  aria-hidden="true"
+                />
+                <span className="hidden whitespace-nowrap 2xl:inline">
+                  Vercel
                 </span>
               </Button>
             </ShadTooltip>
