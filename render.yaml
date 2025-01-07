@@ -10,12 +10,6 @@ services:
     healthCheckPath: /health_check
     autoDeploy: true
     envVars:
-      - key: LANGFLOW_DATABASE_URL
-        value: ""
-      - key: LANGFLOW_SUPERUSER
-        value: ""
-      - key: LANGFLOW_SUPERUSER_PASSWORD
-        value: ""
       - key: LANGFLOW_HOST
         value: "0.0.0.0"
       - key: LANGFLOW_PORT
