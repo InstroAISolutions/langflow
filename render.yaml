@@ -4,7 +4,7 @@ services:
     runtime: docker
     dockerfilePath: ./docker/instro.Dockerfile
     repo: https://github.com/InstroAISolutions/langflow
-    branch: main
+    branch: test
     plan: standard
     region: frankfurt
     healthCheckPath: /health_check
