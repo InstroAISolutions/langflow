@@ -6,7 +6,7 @@ services:
     dockerfilePath: ./docker/instro.Dockerfile
     repo: https://github.com/InstroAISolutions/langflow
     branch: main
-    plan: standard
+    plan: pro
     region: frankfurt
     healthCheckPath: /health_check
     autoDeploy: true
