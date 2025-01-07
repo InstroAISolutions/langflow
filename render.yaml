@@ -12,7 +12,7 @@ services:
     autoDeploy: false
     envVars:
       - key: LANGFLOW_DATABASE_URL
-        value: # db conenction string here e.g. postgresql://[db-user]:[db-password]@[server-url]:[port]/[db-name]
+        value: {{ env.LANGFLOW_DATABASE_URL }}
       - key: LANGFLOW_HOST
         value: 0.0.0.0
       - key: LANGFLOW_PORT
@@ -20,8 +20,8 @@ services:
       - key: LANGFLOW_LOG_LEVEL
         value: ERROR
       - key: LANGFLOW_SUPERUSER
-        value: # username here
+        value: {{ env.LANGFLOW_SUPERUSER }}
       - key: LANGFLOW_SUPERUSER_PASSWORD
-        value: # password here           
+        value: {{ env.LANGFLOW_SUPERUSER_PASSWORD }}
       - key: LANGFLOW_AUTO_LOGIN
         value: false
