@@ -1,11 +1,11 @@
 import AlertDropdown from "@/alerts/alertDropDown";
 import DataStaxLogo from "@/assets/DataStaxLogo.svg?react";
+import InstroLogo from "@/assets/Instro_Brandmark_Coral.svg?react";
 import LangflowLogo from "@/assets/LangflowLogo.svg?react";
 import ForwardedIconComponent from "@/components/common/genericIconComponent";
 import ShadTooltip from "@/components/common/shadTooltipComponent";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { CustomOrgSelector } from "@/customization/components/custom-org-selector";
+import { Separator } from "@/components/ui/separator";import { CustomOrgSelector } from "@/customization/components/custom-org-selector";
 import { CustomProductSelector } from "@/customization/components/custom-product-selector";
 import { ENABLE_DATASTAX_LANGFLOW } from "@/customization/feature-flags";
 import { useCustomNavigate } from "@/customization/hooks/use-custom-navigate";
@@ -65,7 +65,7 @@ export default function AppHeader(): JSX.Element {
           {ENABLE_DATASTAX_LANGFLOW ? (
             <DataStaxLogo className="fill-black dark:fill-[white]" />
           ) : (
-            <LangflowLogo className="h-5 w-6" />
+            <InstroLogo className="h-5 w-6" />
           )}
         </Button>
         {ENABLE_DATASTAX_LANGFLOW && (
@@ -92,7 +92,7 @@ export default function AppHeader(): JSX.Element {
               unstyled
               className="hidden items-center whitespace-nowrap pr-2 2xl:inline"
               onClick={() =>
-                window.open("https://github.com/langflow-ai/langflow", "_blank")
+                window.open("https://github.com/InstroAISolutions/langflow", "_blank")
               }
             >
               <GithubStarComponent />
@@ -183,6 +183,27 @@ export default function AppHeader(): JSX.Element {
                 />
                 <span className="hidden whitespace-nowrap 2xl:inline">
                   Docs
+                </span>
+              </Button>
+            </ShadTooltip>
+            <ShadTooltip content="Vercel" side="bottom" styleClasses="z-10">
+              <Button
+                variant="ghost"
+                className="flex text-sm font-medium"
+                onClick={() =>
+                  window.open(
+                    "https://vercel.com/instro-team",
+                    "_blank",
+                  )
+                }
+              >
+                <ForwardedIconComponent
+                  name="book-open-text"
+                  className="side-bar-button-size h-[18px] w-[18px]"
+                  aria-hidden="true"
+                />
+                <span className="hidden whitespace-nowrap 2xl:inline">
+                  Vercel
                 </span>
               </Button>
             </ShadTooltip>

@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1
 # Keep this syntax directive! It's used to enable Docker BuildKit
 
+# Instyro version of file based on build_and_push.Dockerfile from orginal Langflow repo
+
 ################################
 # BUILDER-BASE
 # Used to build deps + create our virtual environment
@@ -21,16 +23,13 @@ ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
 
 RUN apt-get update \
-    && apt-get upgrade -y \
     && apt-get install --no-install-recommends -y \
     # deps for building python deps
     build-essential \
-    git \
     # npm
     npm \
     # gcc
     gcc \
-
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -41,9 +40,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=src/backend/base/README.md,target=src/backend/base/README.md \
     --mount=type=bind,source=src/backend/base/uv.lock,target=src/backend/base/uv.lock \
     --mount=type=bind,source=src/backend/base/pyproject.toml,target=src/backend/base/pyproject.toml \
-    uv sync --frozen --no-install-project --no-editable --extra postgresql
+    uv sync --frozen --no-install-project --no-editable
 
-COPY ./src /app/src
+ADD ./src /app/src
 
 COPY src/frontend /tmp/src/frontend
 WORKDIR /tmp/src/frontend
@@ -54,12 +53,12 @@ RUN --mount=type=cache,target=/root/.npm \
     && rm -rf /tmp/src/frontend
 
 WORKDIR /app
-COPY ./pyproject.toml /app/pyproject.toml
-COPY ./uv.lock /app/uv.lock
-COPY ./README.md /app/README.md
+ADD ./pyproject.toml /app/pyproject.toml
+ADD ./uv.lock /app/uv.lock
+ADD ./README.md /app/README.md
 
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-editable --extra postgresql
+    uv sync --frozen --no-editable
 
 ################################
 # RUNTIME
@@ -67,23 +66,17 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 ################################
 FROM python:3.12.3-slim AS runtime
 
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y git libpq5 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && useradd user -u 1000 -g 0 --no-create-home --home-dir /app/data
-
+RUN useradd user -u 1000 -g 0 --no-create-home --home-dir /app/data
 COPY --from=builder --chown=1000 /app/.venv /app/.venv
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
 
-LABEL org.opencontainers.image.title=langflow
-LABEL org.opencontainers.image.authors=['Langflow']
+LABEL org.opencontainers.image.title=instro
+LABEL org.opencontainers.image.authors=['Instro']
 LABEL org.opencontainers.image.licenses=MIT
-LABEL org.opencontainers.image.url=https://github.com/langflow-ai/langflow
-LABEL org.opencontainers.image.source=https://github.com/langflow-ai/langflow
+LABEL org.opencontainers.image.url=https://github.com/InstroAISolutions/langflow
+LABEL org.opencontainers.image.source=https://github.com/InstroAISolutions/langflow
 
 USER user
 WORKDIR /app
