@@ -23,6 +23,7 @@ ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
 
 RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install --no-install-recommends -y \
     # deps for building python deps
     build-essential \
@@ -40,7 +41,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=src/backend/base/README.md,target=src/backend/base/README.md \
     --mount=type=bind,source=src/backend/base/uv.lock,target=src/backend/base/uv.lock \
     --mount=type=bind,source=src/backend/base/pyproject.toml,target=src/backend/base/pyproject.toml \
-    uv sync --frozen --no-install-project --no-editable
+    uv sync --frozen --no-install-project --no-editable --extra postgresql
 
 ADD ./src /app/src
 
@@ -58,7 +59,9 @@ ADD ./uv.lock /app/uv.lock
 ADD ./README.md /app/README.md
 
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-editable
+    uv sync --frozen --no-editable --extra postgresql
+
+RUN /app/.venv/bin/uv pip install psycopg
 
 ################################
 # RUNTIME
