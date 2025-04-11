@@ -32,6 +32,7 @@ RUN apt-get update \
     # gcc
     gcc \
     libpq-dev \
+    libpq5 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
