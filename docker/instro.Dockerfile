@@ -74,7 +74,14 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 ################################
 FROM python:3.12.3-slim AS runtime
 
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        libpq5 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN useradd user -u 1000 -g 0 --no-create-home --home-dir /app/data
+
 COPY --from=builder --chown=1000 /app/.venv /app/.venv
 
 # Place executables in the environment at the front of the path
