@@ -76,7 +76,8 @@ FROM python:3.12.3-slim AS runtime
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
-        libpq5 \
+    libpq5 \
+    libc6 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
