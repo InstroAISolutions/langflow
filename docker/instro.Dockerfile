@@ -61,9 +61,9 @@ ADD ./uv.lock /app/uv.lock
 ADD ./README.md /app/README.md
 
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-editable --extra postgresql
+    uv sync --frozen --no-install-project --no-editable --extra postgresql \
+    && /app/.venv/bin/pip install "psycopg[c]"
 
-RUN /app/.venv/bin/uv pip install psycopg
 
 ################################
 # RUNTIME
